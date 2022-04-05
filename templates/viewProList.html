@@ -1,0 +1,59 @@
+{% extends "Basic.html" %}
+
+{% block style %}
+<style>
+    body {
+    margin: auto;
+    }
+    th, td, table {
+    border: 1px solid black;
+    border-collapse: collapse;
+            }
+    td, th {
+    padding: 15px;
+    text-align: center;
+                }
+    tr:hover {background-color: rgb(253, 255, 146);}
+    th {
+background-color: #026ee9;
+color: white;
+}
+</style>
+        {% endblock %}
+
+{% block content %}
+<center>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">SEND</button>
+</form>
+
+{% if p %}
+<table>
+    <tr>
+        <th><h2>Name</h2></th>
+        <th><h2>Category</h2></th>
+        <th><h2>Quantity</h2></th>
+        <th><h2>Company</h2></th>
+
+    </tr>
+    {% for i in p %}
+    <tr>
+        <td>{{i.Name}}</td>
+        <td>{{i.Category}}</td>
+        <td>{{i.Quantity}}</td>
+        <td>{{i.Company}}</td>
+    </tr>
+    {% endfor %}
+    
+</table>
+
+   
+    {% else %}
+      <p class=" bg bg-white">No such Record.</p>
+    {% endif %}  
+    
+</center>
+{% endblock %}

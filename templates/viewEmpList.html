@@ -1,0 +1,80 @@
+{% extends "Basic.html" %}
+
+{% block style %}
+<style>
+    body {
+    margin: auto;
+    }
+    th, td, table {
+    border: 1px solid black;
+    border-collapse: collapse;
+            }
+    td, th {
+    padding: 15px;
+    text-align: center;
+                }
+    tr:hover {background-color: rgb(254, 255, 192);}
+    th {
+background-color: #026ee9;
+color: white;
+}
+</style>
+        {% endblock %}
+
+{% block content %}
+<center>
+
+{% if e %}
+<form method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">SEND</button>
+</form>
+<br>
+<table>
+    {% if request.user.is_superuser%}
+    <tr>
+        <th><h2>ID</h2></th>
+        <th><h2>Name</h2></th>
+        <th><h2>Department</h2></th>
+        <th><h2> Username </h2></th>
+    </tr>
+    
+    {% for i in e %}
+    <tr>
+        <td>{{i.EmpID}}</td>
+        <td>{{i.Name}}</td>
+        <td>{{i.Department}}</td>
+        <td>{{i.user.username}}</td>
+        <td><button><a href="{% url 'emp_update' i.id %}">Update</a></button></td>
+        <td><button><a href="{% url 'emp_del' i.id %}">Delete</a></button></td>
+
+    </tr>
+    {% endfor %}
+    {%else %}
+
+    <tr>
+        <th><h2>Name</h2></th>
+        <th><h2>Department</h2></th>
+        <th><h2> Username </h2></th>
+    </tr>
+
+    {% for i in e %}
+    <tr>
+        <td>{{i.Name}}</td>
+        <td>{{i.Department}}</td>
+        <td>{{i.user.username}}</td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+
+</table>
+
+    {% else %}
+      <p class=" bg bg-white">There are no Employee Record.</p>
+    {% endif %}  
+    
+</center>
+{% endblock %}
+
+

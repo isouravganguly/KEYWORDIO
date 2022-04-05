@@ -1,0 +1,56 @@
+{% extends "Basic.html" %}
+
+{% block style %}
+<style>
+    body {
+    margin: auto;
+    }
+    th, td, table {
+    border: 1px solid black;
+    border-collapse: collapse;
+            }
+    td, th {
+    padding: 15px;
+    text-align: center;
+                }
+    tr:hover {background-color: rgb(253, 255, 146);}
+    th {
+background-color: #026ee9;
+color: white;
+}
+</style>
+        {% endblock %}
+
+{% block content %}
+<center>
+
+{% if a %}
+<table>
+    <tr>
+        <th><h2>Name</h2></th>
+        <th><h2>Category</h2></th>
+        <th><h2>Quantity</h2></th>
+        <th><h2>Company</h2></th>
+        <th><h2>Issue</h2></th>
+
+    </tr>
+    {% for i in a %}
+    <tr>
+        <td>{{i.proID.Name}}</td>
+        <td>{{i.proID.Category}}</td>
+        <td>{{i.quantity}}</td>
+        <td>{{i.proID.Company}}</td>
+        <td>{{i.issueDate}}</td>
+
+    </tr>
+    {% endfor %}
+    
+</table>
+
+   
+    {% else %}
+      <p class=" bg bg-white">There are no books.</p>
+    {% endif %}  
+    
+</center>
+{% endblock %}
